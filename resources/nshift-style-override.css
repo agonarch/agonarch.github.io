@@ -66,7 +66,7 @@ p, blockquote, dt, td.content, td.hdlist1, span.alt, summary {
     font-size: 14px;
     font-weight: 500;
     color: #333B63;
-    line-height: 16px;
+    line-height: 24px;
 }
 
 #content h1>a.link:hover,h2>a.link:hover,h3>a.link:hover,#toctitle>a.link:hover,.sidebarblock>.content>.title>a.link:hover,h4>a.link:hover,h5>a.link:hover,h6>a.link:hover {
@@ -187,6 +187,19 @@ code {
     font-weight:400;
     font-style:normal;
     font-size: 12px;
+}
+
+/* highlight text */
+:not(pre):not([class^=L])>code {
+    background: #E5E6EB;
+}
+
+.listingblock pre.highlightjs {
+    border-radius: 8px;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.15), -1px 0px 20px rgba(0, 0, 0, 0.05);
+    opacity: 1;
+    /* background-color: rgba(255, 255, 255, 1); */
+    overflow: hidden;
 }
 
 /* for table contents */

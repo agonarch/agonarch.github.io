@@ -1,42 +1,51 @@
 == Endpoints
-This section describes the API; information regarding authenticating to API is provided first, +
-followed by the description of the respective API resources, in relation to their related functionality.
+This section describes the API. + 
+Information regarding authenticating to API is provided first, followed by the description of the respective API resources, in relation to their related functionality.
 
 ==== Explanation
-The descriptions provide the following API properties;
+The descriptions provide the following API properties:
 
 * Supported data formats
 * Supported verbs
-* Request/response status codes and error messages.
-* Data type.
-* Data Constrains (if applicable).
-* Data default (if applicable).
+* Request/response status codes and error messages
+* Data type
+* Data Constrains (if applicable)
+* Data default (if applicable)
 
 === 1.0 Authenticating
-For version two, the API employs token based authentication. An issued token has a 24-hour validity period.
+The API employs token based authentication. + 
+An issued token has a 24-hour validity period.
 
 ==== 1.1 Requesting for a token
-To request for a token, make a GET request to <<main.adoc#_environments,environment_base_url>>/login using basic authentication with valid user credentials.
-As response a JWT token is returned and is valid for 24 hours.
+To request for a token, make a GET request to: + 
 
-Having received the token, subsequent calls to the API have to be made with token placed in the `Authorization` header of the request with prefix `Bearer`.
+`GET request to <<main.adoc#_environments,environment_base_url>>/login` +
 
-When the token is expired you will receive a response Token expired and you’ll have to make sure to request for a new token. Or, just make sure to request for a token every 24 hours. Do NOT request for a token before every other API call you do; this is causing a lot of unneccesary API traffic on both our as your servers.
+Use basic authentication with valid user credentials. +
+As response a JWT token is returned which is valid for 24 hours.
 
-Example header key `Authorization` with value `Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ...`
+Having received the token, subsequent calls to the API have to be made with the token placed in the `Authorization` header of the request with prefix `Bearer`.
 
-You can also request for a key by specifying the parameter response=key. This key can be used in the direct links. This key is 24 hours valid.
+When the token is expired, you will receive a response that the token has expired and you will have to make sure to request for a new token. + 
+Alternatively, you can also just request for a token every 24 hours. +
+Do *NOT* request for a token before every other API call you do; this is causing a lot of unneccesary API traffic on both our as your servers.
 
-To get the account where the user belongs to, specify the parameter response=account.
+Example: header key `Authorization` with value `Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ...`
 
-To get the token, the key and the account, specify the parameter response=token,key,account.
+You can also request for a key by specifying the parameter "response=key". + 
+This key can be used in the direct links. + 
+This key is 24 hours valid.
 
-NOTE: In case of a failed request, an appropriate response with be given, indicating a likely cause.
+To get the account where the user belongs to, specify the parameter "response=account".
+
+To get the token, the key and the account, specify the parameter "response=token,key,account".
+
+NOTE: In case of a failed request, an appropriate response will be given, indicating a probable cause.
 
 
 
 === 2.0 Shipment management
-This involves booking/creation, manifesting, deletion and retrieval of shipments.
+This involves creating, booking, printing, manifesting, deleting and retrieving shipments.
 
 `Main resource:` v2/shipments
 
@@ -64,16 +73,20 @@ This involves status tracking after a shipment is successfully booked.
 include::services/statuses/service_doc.adoc[]
 
 === 6.0 Address book management
-This involves managing addresses which can be reference as shipment receiver addresses or as dispatching points.
+This involves managing addresses that can be used as: +
+
+* receiver address for a shipment: "type": "RECV" +
+    or as: + 
+* dispatching location or, in other words, sender address: "type": "SEND".
 
 `Main resource:` v2/addresses
 
 include::services/addresses/service_doc.adoc[]
 
 === 7.0 Account management
-This involves managing accounts and there settings.
-Some settings are inherited from the parent account(s), these settings can not be changed/deleted. These settings have a index value of -1. 
-The settings are returned as a String but contain a json object, so beware that you first need to unwrap the String and then the appropriate setting object.
+This involves managing accounts and their settings. +
+Some settings are inherited from the parent account(s). These settings cannot be changed or deleted. These settings have an index value of -1. +
+The settings are returned as a String, but contain a json object, so beware that you first need to unwrap the String and then the appropriate setting object.
 
 `Main resource:` v2/accounts
 

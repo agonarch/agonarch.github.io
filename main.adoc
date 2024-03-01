@@ -1,5 +1,5 @@
-= Transsmart Developer Documentation
-(C) {docyear}, development team Tilburg, last update {docdate}
+= nShift Transsmart Developer Documentation
+Copyright (C) {docyear} - Product Development - last updated: {docdate}
 :doctype: book
 :docinfo: shared,shared-head
 :icons: font
@@ -41,7 +41,8 @@ The RESTful API has recently received a major upgrade in terms of features and c
 
 [[restful_api]]
 == Validation rules and directives
-The API is offered as a RESTful web service
+The API is offered as a RESTful web service. + 
+The API assumes a plural-based resources naming convention.
 
 === Prerequisites
 * A valid and active Transsmart account.
@@ -58,15 +59,15 @@ IMPORTANT: It is import to note that this document assumes certain technical kno
 |===
 | Environment | Base URL | Description
 
-| `Beta developments`
+| `BETA`
 | https://beta-api.transsmart.com
 | Available for (pilot) customers. Changes are deployed at least 1 week before being deployed to Accept.
 
-| `User acceptance`
+| `ACCEPT`
 | https://accept-api.transsmart.com
-| Technically equal to Production except on deployment day (1 day difference); mainly used for implementations and training.
+| Technically equal to Production except on deployment day (1 day difference); mainly used for implementations, validate new configurations and training.
 
-| `Production`
+| `PRODUCTION`
 | https://api.transsmart.com
 | Production environment
 |===
@@ -134,7 +135,7 @@ use of HTTP status codes.
 | The request entity has a media type which the server or resource does not support. For example, the client posts a request as text/plain, but the server requires that the post use a different format as to be aapplication/xml or application/json.
 
 | `429 Too Many Requests`
-| The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes.
+| The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes. See chapter 'Rate limiter' below for more information.
 
 | `500 Internal Server Error`
 | A generic error message, given when an unexpected condition was encountered and no more specific message is suitable.
@@ -167,13 +168,13 @@ For these three fields we comply with below applicable ISO codes:
 | Parameter | Description
 
 | `language`
-| ISO 639-1 two letter code; lower case.
+| ISO 639-1 two letter code in lower case.
 
 | `country`
-| ISO 3166-1 two letter code; upper case.
+| ISO 3166-1 two letter code in upper case.
 
 | `currency`
-| ISO 4217 three letter code; upper case.
+| ISO 4217 three letter code in upper case.
 |===
 
 === Supported Data formats
@@ -181,8 +182,30 @@ Both JSON and XML are supported as input and output data formats.
 
 NOTE: In the examples given in the resources' description only the json format is demonstrated.
 
+=== MyTranssmart dashboard
+In a nutshell: MyTranssmart is the dashboard which can be used to manage shipments. The dashboard is fully connected to our API backend, so all actions in the dashboard are done via API request calls and responses. When opening the Developer Tools in the internet browser, the Network tab will show wich Request URL is called when doing a specific action. This way you can understand in a more visual way which calls are being used for which purpose and which responses are given.
+
+These are the URL's:
+
+[width="100%",cols="3,10",options="header"]
+|===
+| Environment | URL
+
+| `BETA`
+| https://beta-my.transsmart.com/
+
+| `ACCEPT`
+| https://accept-my.transsmart.com/
+
+| `PRODUCTION`
+| https://my.transsmart.com/
+|===
+
+
 === Direct links
-MyTranssmart supports direct links. These can be used to direct link from an ERP system to a specific page in the MyTranssmart dashboard: Path /v2/direct/details?key=cQBauM7gcQBauM7gcQBauM7gcQBauM7g gcQBauM7gcQBauM7gcQBauM7g&reference=7111117854 (key and reference are not valid, you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters). See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key. 
+The MyTranssmart dashboard supports direct links. These can be used to direct link from an ERP system to a specific page in the MyTranssmart dashboard: + 
+Path /v2/direct/details?key=cQBauM7gcQBauM7g...&reference=71117854 +
+Note: key and reference are not valid, you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters. See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key. 
 
 Options:
 
@@ -190,38 +213,39 @@ Options:
 * /v2/direct/overview?key=….
 * /v2/direct/manifest?key=….
 
-Key = the login key +
-Reference = the reference of a shipment +
-account= Account = Optional the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account.
+Explanation:
+
+* Key = the login key +
+* Reference = the reference of a shipment +
+* Account = optional, the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account. See chapter 'Act on behalf' below for more information.
 
 === Accounts hierarchy
-Accounts are hierarchical, meaning; when logged in on an account there is also access possible to the child accounts. This is reflected on the interface by specifying the account on which the action should take place. Trying to access another accounts will be denied with a http status 'FORBIDDEN'.
-This accounts hierarchy  also applies to the accounts settings, so any setting specified on an account is also applicable for the child accounts.
-
-The API assumes a plural-based resources naming convention.
+Accounts are hierarchical, meaning when logged in on an account it is also possible to access child accounts. This is reflected on the interface by specifying the account on which the action should take place. Trying to access another account will be denied with an http status 'UNAUTHORIZED'.
+This accounts hierarchy also applies to the accounts settings so any setting specified on an account is also applicable for the child accounts.
 
 === Act on Behalf
 
 The 'Act on Behalf' feature of the API makes it possible to use a child/grandchild account in the same way as the account where you are logged into. You can perform the same actions on the child account as which you can do on the logged in account. This can be done by replacing the account code in the URL by the account code that you want the action to be performed on. 
 
 Example:
-You login as user of the ERPDEMO account. A booking is then performed with this URL:
+You login as user of the ERPDEMO account, which is a main/parent account. A booking is then performed with this URL:
 
-/v2/shipments/ERPDEMO/BOOK
+`POST request to /v2/shipments/*ERPDEMO*/BOOK`
 
 This will book the shipment on account ERPDEMO. 
 
-If you want to book on the child account ERDEMOCHILD (the ERDEMOCHILD has to be configured as a child/grandchild of ERPDEMO) the flow is:
-You login as user of the ERPDEMO account (so the same user as above). A booking is then performed with this URL:
+Now for example, account ERDEMOCHILD is a child account of ERPDEMO. If you want to book on account ERDEMOCHILD the flow is: +
+1. You login as user of the ERPDEMO account (so the same user as above). +
+2. A booking is then performed with this URL:
 
-/v2/shipments/ERDEMOCHILD/BOOK
+`POST request to /v2/shipments/*ERDEMOCHILD*/BOOK`
 
 This wil book the shipment on account ERDEMOCHILD.
 
 The <<_7_9_get_account_information,Account information>> endpoint provides information to which account the Act on Behalf can be performed. 
 
 
-Permissions 
+*Permissions* 
 
 You keep the same permissions as you have on the parent account, even if the child account has less permissions.
 
@@ -238,7 +262,7 @@ Normal error:
 ----
 {
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS222122",
     "message": "Failed to print",
     "description": "No printer found for type: LASER",
@@ -249,20 +273,20 @@ Validation errors:
 ----
 {
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS10002",
     "message": "Invalid input shipment data",
     "details": [{
-            "reference": "this_reference_is_tolong_so_a_error_will_be_reported",
+            "reference": "this_reference_is_too_long_so_an_error_will_be_reported",
             "validationErrors": [{
                     "object": "Shipment",
                     "field": "reference",
-                    "rejectedValue": "this_reference_is_tolong_so_a_error_will_be_reported",
+                    "rejectedValue": "this_reference_is_too_long_so_an_error_will_be_reported",
                     "message": "size must be between 1 and 32"
                 }, {
                     "object": "Shipment",
                     "field": "carrier",
-                    "rejectedValue": "to_long_carrier",
+                    "rejectedValue": "too_long_carrier",
                     "message": "Carrier must be 3 characters"
                 }
             ]
@@ -276,13 +300,13 @@ Errors with detail information:
 ----
 {
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS10002",
     "message": "Batch booking error",
     "description": "Booking failed for all shipments",
     "details": [{
             "errorCode": "TS222122",
-            "errorDescription": " Shipment with reference 1213445 already exists with status LABL and can not be changed.",
+            "errorDescription": "Shipment with reference 12345 already exists with status LABL and cannot be changed.",
             "errorTitle": "Batch booking failed"
         }
     ]
@@ -290,26 +314,8 @@ Errors with detail information:
 }
 ----
 
-=== API QuickGuides
-These QuickGuides help you integrate with Transsmart. 
-
-
-link:docs/QuickGuide_for_API_integration_-_Using_Postman_for_API_Integration.pdf[*QuickGuide for API integration - Using Postman for API Integration*]
-
-link:docs/QuickGuide_for_API_integration_-_Basic_Actions.pdf[*QuickGuide for API integration - Basic Actions*]
-
-link:docs/QuickGuide_for_API_integration_-_Location_select.pdf[*QuickGuide for API integration - Location Select*]
-
-link:docs/QuickGuide_for_API_integration_-_Shipment_Status_Tracking.pdf[*QuickGuide for API integration - Shipment Status Tracking*]
-
-link:docs/QuickGuide_for_API_integration_-_Using_Account_Settings.pdf[*QuickGuide for API integration - Using Account Settings*]
-
-link:docs/QuickGuide_for_API_integration_-_Using_Addresses.pdf[*QuickGuide for API integration - Using Addresses*]
-
-link:docs/QuickGuide_for_API_integration_-_Using_Tariffs.pdf[*QuickGuide for API integration - Using Tariffs*]
-
 ---
-This section (introduction) has mainly introduced the Transsmart API, described how this documentation may be used and established some conventions adopted by the Transsmart API.
+This introduction has mainly introduced the Transsmart API, described how this documentation may be used and established some conventions adopted by the Transsmart API.
 
 The next section describes the API, by defining the resources it offers, how they may be used and their respective behaviour (normal and in error).
 

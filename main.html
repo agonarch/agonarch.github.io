@@ -5,8 +5,8 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.21">
-<meta name="author" content="&#169; 2024, development team Tilburg, last update 2024-02-28">
-<title>Transsmart Developer Documentation</title>
+<meta name="author" content="Copyright &#169; 2024 - Product Development - last updated: 2024-03-01">
+<title>nShift Transsmart Developer Documentation</title>
 <link rel="stylesheet" href="./resources/nshift-style-override.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/github.min.css">
@@ -31,9 +31,9 @@
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>Transsmart Developer Documentation</h1>
+<h1>nShift Transsmart Developer Documentation</h1>
 <div class="details">
-<span id="author" class="author">&#169; 2024, development team Tilburg, last update 2024-02-28</span><br>
+<span id="author" class="author">Copyright &#169; 2024 - Product Development - last updated: 2024-03-01</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -50,11 +50,11 @@
 <li><a href="#_rate_limiter">Rate Limiter</a></li>
 <li><a href="#_localization">Localization</a></li>
 <li><a href="#_supported_data_formats">Supported Data formats</a></li>
+<li><a href="#_mytranssmart_dashboard">MyTranssmart dashboard</a></li>
 <li><a href="#_direct_links">Direct links</a></li>
 <li><a href="#_accounts_hierarchy">Accounts hierarchy</a></li>
 <li><a href="#_act_on_behalf">Act on Behalf</a></li>
 <li><a href="#_reported_errors">Reported errors</a></li>
-<li><a href="#_api_quickguides">API QuickGuides</a></li>
 </ul>
 </li>
 <li><a href="#_endpoints">Endpoints</a>
@@ -341,7 +341,8 @@ For any reader of this document, it should be possible to easily identify what t
 <h2 id="restful_api"><a class="link" href="#restful_api">Validation rules and directives</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>The API is offered as a RESTful web service</p>
+<p>The API is offered as a RESTful web service.<br>
+The API assumes a plural-based resources naming convention.</p>
 </div>
 <div class="sect2">
 <h3 id="_prerequisites"><a class="link" href="#_prerequisites">Prerequisites</a></h3>
@@ -394,17 +395,17 @@ It is import to note that this document assumes certain technical knowledge on t
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Beta developments</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BETA</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://beta-api.transsmart.com" class="bare">https://beta-api.transsmart.com</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Available for (pilot) customers. Changes are deployed at least 1 week before being deployed to Accept.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>User acceptance</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ACCEPT</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://accept-api.transsmart.com" class="bare">https://accept-api.transsmart.com</a></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Technically equal to Production except on deployment day (1 day difference); mainly used for implementations and training.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Technically equal to Production except on deployment day (1 day difference); mainly used for implementations, validate new configurations and training.</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Production</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PRODUCTION</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://api.transsmart.com" class="bare">https://api.transsmart.com</a></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">Production environment</p></td>
 </tr>
@@ -510,7 +511,7 @@ use of HTTP status codes.</p>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>429 Too Many Requests</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The user has sent too many requests in a given amount of time. Intended for use with rate-limiting schemes. See chapter 'Rate limiter' below for more information.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>500 Internal Server Error</code></p></td>
@@ -581,15 +582,15 @@ We comply with a Fair Use Policy and will adjust the values -and in exceptional 
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>language</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 639-1 two letter code; lower case.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 639-1 two letter code in lower case.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>country</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 3166-1 two letter code; upper case.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 3166-1 two letter code in upper case.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>currency</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 4217 three letter code; upper case.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">ISO 4217 three letter code in upper case.</p></td>
 </tr>
 </tbody>
 </table>
@@ -613,9 +614,46 @@ In the examples given in the resources' description only the json format is demo
 </div>
 </div>
 <div class="sect2">
+<h3 id="_mytranssmart_dashboard"><a class="link" href="#_mytranssmart_dashboard">MyTranssmart dashboard</a></h3>
+<div class="paragraph">
+<p>In a nutshell: MyTranssmart is the dashboard which can be used to manage shipments. The dashboard is fully connected to our API backend, so all actions in the dashboard are done via API request calls and responses. When opening the Developer Tools in the internet browser, the Network tab will show wich Request URL is called when doing a specific action. This way you can understand in a more visual way which calls are being used for which purpose and which responses are given.</p>
+</div>
+<div class="paragraph">
+<p>These are the URL&#8217;s:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 23.0769%;">
+<col style="width: 76.9231%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Environment</th>
+<th class="tableblock halign-left valign-top">URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>BETA</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://beta-my.transsmart.com/" class="bare">https://beta-my.transsmart.com/</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>ACCEPT</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://accept-my.transsmart.com/" class="bare">https://accept-my.transsmart.com/</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PRODUCTION</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://my.transsmart.com/" class="bare">https://my.transsmart.com/</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
 <h3 id="_direct_links"><a class="link" href="#_direct_links">Direct links</a></h3>
 <div class="paragraph">
-<p>MyTranssmart supports direct links. These can be used to direct link from an ERP system to a specific page in the MyTranssmart dashboard: Path /v2/direct/details?key=cQBauM7gcQBauM7gcQBauM7gcQBauM7g gcQBauM7gcQBauM7gcQBauM7g&amp;reference=7111117854 (key and reference are not valid, you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters). See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key.</p>
+<p>The MyTranssmart dashboard supports direct links. These can be used to direct link from an ERP system to a specific page in the MyTranssmart dashboard:<br>
+Path /v2/direct/details?key=cQBauM7gcQBauM7g&#8230;&#8203;&amp;reference=71117854<br>
+Note: key and reference are not valid, you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters. See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key.</p>
 </div>
 <div class="paragraph">
 <p>Options:</p>
@@ -634,19 +672,27 @@ In the examples given in the resources' description only the json format is demo
 </ul>
 </div>
 <div class="paragraph">
-<p>Key = the login key<br>
-Reference = the reference of a shipment<br>
-account= Account = Optional the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account.</p>
+<p>Explanation:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Key = the login key<br></p>
+</li>
+<li>
+<p>Reference = the reference of a shipment<br></p>
+</li>
+<li>
+<p>Account = optional, the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account. See chapter 'Act on behalf' below for more information.</p>
+</li>
+</ul>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_accounts_hierarchy"><a class="link" href="#_accounts_hierarchy">Accounts hierarchy</a></h3>
 <div class="paragraph">
-<p>Accounts are hierarchical, meaning; when logged in on an account there is also access possible to the child accounts. This is reflected on the interface by specifying the account on which the action should take place. Trying to access another accounts will be denied with a http status 'FORBIDDEN'.
-This accounts hierarchy  also applies to the accounts settings, so any setting specified on an account is also applicable for the child accounts.</p>
-</div>
-<div class="paragraph">
-<p>The API assumes a plural-based resources naming convention.</p>
+<p>Accounts are hierarchical, meaning when logged in on an account it is also possible to access child accounts. This is reflected on the interface by specifying the account on which the action should take place. Trying to access another account will be denied with an http status 'UNAUTHORIZED'.
+This accounts hierarchy also applies to the accounts settings so any setting specified on an account is also applicable for the child accounts.</p>
 </div>
 </div>
 <div class="sect2">
@@ -656,20 +702,21 @@ This accounts hierarchy  also applies to the accounts settings, so any setting s
 </div>
 <div class="paragraph">
 <p>Example:
-You login as user of the ERPDEMO account. A booking is then performed with this URL:</p>
+You login as user of the ERPDEMO account, which is a main/parent account. A booking is then performed with this URL:</p>
 </div>
 <div class="paragraph">
-<p>/v2/shipments/ERPDEMO/BOOK</p>
+<p><code>POST request to /v2/shipments/<strong>ERPDEMO</strong>/BOOK</code></p>
 </div>
 <div class="paragraph">
 <p>This will book the shipment on account ERPDEMO.</p>
 </div>
 <div class="paragraph">
-<p>If you want to book on the child account ERDEMOCHILD (the ERDEMOCHILD has to be configured as a child/grandchild of ERPDEMO) the flow is:
-You login as user of the ERPDEMO account (so the same user as above). A booking is then performed with this URL:</p>
+<p>Now for example, account ERDEMOCHILD is a child account of ERPDEMO. If you want to book on account ERDEMOCHILD the flow is:<br>
+1. You login as user of the ERPDEMO account (so the same user as above).<br>
+2. A booking is then performed with this URL:</p>
 </div>
 <div class="paragraph">
-<p>/v2/shipments/ERDEMOCHILD/BOOK</p>
+<p><code>POST request to /v2/shipments/<strong>ERDEMOCHILD</strong>/BOOK</code></p>
 </div>
 <div class="paragraph">
 <p>This wil book the shipment on account ERDEMOCHILD.</p>
@@ -678,7 +725,7 @@ You login as user of the ERPDEMO account (so the same user as above). A booking 
 <p>The <a href="#_7_9_get_account_information">Account information</a> endpoint provides information to which account the Act on Behalf can be performed.</p>
 </div>
 <div class="paragraph">
-<p>Permissions</p>
+<p><strong>Permissions</strong></p>
 </div>
 <div class="paragraph">
 <p>You keep the same permissions as you have on the parent account, even if the child account has less permissions.</p>
@@ -703,7 +750,7 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS222122",
     "message": "Failed to print",
     "description": "No printer found for type: LASER",
@@ -717,20 +764,20 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS10002",
     "message": "Invalid input shipment data",
     "details": [{
-            "reference": "this_reference_is_tolong_so_a_error_will_be_reported",
+            "reference": "this_reference_is_too_long_so_an_error_will_be_reported",
             "validationErrors": [{
                     "object": "Shipment",
                     "field": "reference",
-                    "rejectedValue": "this_reference_is_tolong_so_a_error_will_be_reported",
+                    "rejectedValue": "this_reference_is_too_long_so_an_error_will_be_reported",
                     "message": "size must be between 1 and 32"
                 }, {
                     "object": "Shipment",
                     "field": "carrier",
-                    "rejectedValue": "to_long_carrier",
+                    "rejectedValue": "too_long_carrier",
                     "message": "Carrier must be 3 characters"
                 }
             ]
@@ -746,13 +793,13 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2023-07-24T12:42:49.450320273",
+    "timestamp": "2024-02-28T12:42:49.450320273",
     "code": "TS10002",
     "message": "Batch booking error",
     "description": "Booking failed for all shipments",
     "details": [{
             "errorCode": "TS222122",
-            "errorDescription": " Shipment with reference 1213445 already exists with status LABL and can not be changed.",
+            "errorDescription": "Shipment with reference 12345 already exists with status LABL and cannot be changed.",
             "errorTitle": "Batch booking failed"
         }
     ]
@@ -760,36 +807,9 @@ The child account does not have Reporting permissions which means that users tha
 }</code></pre>
 </div>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_api_quickguides"><a class="link" href="#_api_quickguides">API QuickGuides</a></h3>
-<div class="paragraph">
-<p>These QuickGuides help you integrate with Transsmart.</p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Using_Postman_for_API_Integration.pdf"><strong>QuickGuide for API integration - Using Postman for API Integration</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Basic_Actions.pdf"><strong>QuickGuide for API integration - Basic Actions</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Location_select.pdf"><strong>QuickGuide for API integration - Location Select</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Shipment_Status_Tracking.pdf"><strong>QuickGuide for API integration - Shipment Status Tracking</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Using_Account_Settings.pdf"><strong>QuickGuide for API integration - Using Account Settings</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Using_Addresses.pdf"><strong>QuickGuide for API integration - Using Addresses</strong></a></p>
-</div>
-<div class="paragraph">
-<p><a href="docs/QuickGuide_for_API_integration_-_Using_Tariffs.pdf"><strong>QuickGuide for API integration - Using Tariffs</strong></a></p>
-</div>
 <hr>
 <div class="paragraph">
-<p>This section (introduction) has mainly introduced the Transsmart API, described how this documentation may be used and established some conventions adopted by the Transsmart API.</p>
+<p>This introduction has mainly introduced the Transsmart API, described how this documentation may be used and established some conventions adopted by the Transsmart API.</p>
 </div>
 <div class="paragraph">
 <p>The next section describes the API, by defining the resources it offers, how they may be used and their respective behaviour (normal and in error).</p>
@@ -813,13 +833,13 @@ From this point on-words, where used in this documentation, the "API" refers to 
 <h2 id="_endpoints"><a class="link" href="#_endpoints">Endpoints</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>This section describes the API; information regarding authenticating to API is provided first,<br>
-followed by the description of the respective API resources, in relation to their related functionality.</p>
+<p>This section describes the API.<br>
+Information regarding authenticating to API is provided first, followed by the description of the respective API resources, in relation to their related functionality.</p>
 </div>
 <div class="sect3">
 <h4 id="_explanation"><a class="link" href="#_explanation">Explanation</a></h4>
 <div class="paragraph">
-<p>The descriptions provide the following API properties;</p>
+<p>The descriptions provide the following API properties:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -830,16 +850,16 @@ followed by the description of the respective API resources, in relation to thei
 <p>Supported verbs</p>
 </li>
 <li>
-<p>Request/response status codes and error messages.</p>
+<p>Request/response status codes and error messages</p>
 </li>
 <li>
-<p>Data type.</p>
+<p>Data type</p>
 </li>
 <li>
-<p>Data Constrains (if applicable).</p>
+<p>Data Constrains (if applicable)</p>
 </li>
 <li>
-<p>Data default (if applicable).</p>
+<p>Data default (if applicable)</p>
 </li>
 </ul>
 </div>
@@ -847,31 +867,42 @@ followed by the description of the respective API resources, in relation to thei
 <div class="sect2">
 <h3 id="_1_0_authenticating"><a class="link" href="#_1_0_authenticating">1.0 Authenticating</a></h3>
 <div class="paragraph">
-<p>For version two, the API employs token based authentication. An issued token has a 24-hour validity period.</p>
+<p>The API employs token based authentication.<br>
+An issued token has a 24-hour validity period.</p>
 </div>
 <div class="sect3">
 <h4 id="_1_1_requesting_for_a_token"><a class="link" href="#_1_1_requesting_for_a_token">1.1 Requesting for a token</a></h4>
 <div class="paragraph">
-<p>To request for a token, make a GET request to <a href="#_environments">environment_base_url</a>/login using basic authentication with valid user credentials.
-As response a JWT token is returned and is valid for 24 hours.</p>
+<p>To request for a token, make a GET request to:<br></p>
 </div>
 <div class="paragraph">
-<p>Having received the token, subsequent calls to the API have to be made with token placed in the <code>Authorization</code> header of the request with prefix <code>Bearer</code>.</p>
+<p><code>GET request to <a href="#_environments">environment_base_url</a>/login</code><br></p>
 </div>
 <div class="paragraph">
-<p>When the token is expired you will receive a response Token expired and you’ll have to make sure to request for a new token. Or, just make sure to request for a token every 24 hours. Do NOT request for a token before every other API call you do; this is causing a lot of unneccesary API traffic on both our as your servers.</p>
+<p>Use basic authentication with valid user credentials.<br>
+As response a JWT token is returned which is valid for 24 hours.</p>
 </div>
 <div class="paragraph">
-<p>Example header key <code>Authorization</code> with value <code>Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ&#8230;&#8203;</code></p>
+<p>Having received the token, subsequent calls to the API have to be made with the token placed in the <code>Authorization</code> header of the request with prefix <code>Bearer</code>.</p>
 </div>
 <div class="paragraph">
-<p>You can also request for a key by specifying the parameter response=key. This key can be used in the direct links. This key is 24 hours valid.</p>
+<p>When the token is expired, you will receive a response that the token has expired and you will have to make sure to request for a new token.<br>
+Alternatively, you can also just request for a token every 24 hours.<br>
+Do <strong>NOT</strong> request for a token before every other API call you do; this is causing a lot of unneccesary API traffic on both our as your servers.</p>
 </div>
 <div class="paragraph">
-<p>To get the account where the user belongs to, specify the parameter response=account.</p>
+<p>Example: header key <code>Authorization</code> with value <code>Bearer eyJhbGciOiJIUzUxMiIsInppcCI6IkdaSVAifQ&#8230;&#8203;</code></p>
 </div>
 <div class="paragraph">
-<p>To get the token, the key and the account, specify the parameter response=token,key,account.</p>
+<p>You can also request for a key by specifying the parameter "response=key".<br>
+This key can be used in the direct links.<br>
+This key is 24 hours valid.</p>
+</div>
+<div class="paragraph">
+<p>To get the account where the user belongs to, specify the parameter "response=account".</p>
+</div>
+<div class="paragraph">
+<p>To get the token, the key and the account, specify the parameter "response=token,key,account".</p>
 </div>
 <div class="admonitionblock note">
 <table>
@@ -880,7 +911,7 @@ As response a JWT token is returned and is valid for 24 hours.</p>
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-In case of a failed request, an appropriate response with be given, indicating a likely cause.
+In case of a failed request, an appropriate response will be given, indicating a probable cause.
 </td>
 </tr>
 </table>
@@ -890,7 +921,7 @@ In case of a failed request, an appropriate response with be given, indicating a
 <div class="sect2">
 <h3 id="_2_0_shipment_management"><a class="link" href="#_2_0_shipment_management">2.0 Shipment management</a></h3>
 <div class="paragraph">
-<p>This involves booking/creation, manifesting, deletion and retrieval of shipments.</p>
+<p>This involves creating, booking, printing, manifesting, deleting and retrieving shipments.</p>
 </div>
 <div class="paragraph">
 <p><code>Main resource:</code> v2/shipments</p>
@@ -900,16 +931,26 @@ In case of a failed request, an appropriate response with be given, indicating a
 <div class="sect4">
 <h5 id="_action_parameter"><a class="link" href="#_action_parameter">Action parameter</a></h5>
 <div class="paragraph">
-<p>The action parameter can be either CREATE , BOOK or PRINT.<br>
-With CREATE the shipment is only saved; no validation is performed. This can be used as a draft booking.<br>
-With BOOK the shipment is booked.<br>
-With PRINT the shipment is also booked and the parameter rawJob determines if the printing should be handled by the system or the to be printed documents should be returned in the response.<br>
+<p>The action parameter can be either CREATE , BOOK or PRINT.<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>With CREATE the shipment is only saved; no validation is performed. This can be used as a draft booking.<br></p>
+</li>
+<li>
+<p>With BOOK the shipment is booked.<br></p>
+</li>
+<li>
+<p>With PRINT the shipment is also booked and the parameter rawJob determines if the printing should be handled by the system or the to be printed documents should be returned in the response.<br>
 So in case of a rawJob, the actual base64 encoded shipment level and package level documents (PDF and/or ZPL) are included in the response.<br></p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>The origin/source system of the booking can be specified in the http header 'TranssmartOrigin'. If this header is not specified then the value 'API2' is used. This is not the same as the REST origin header; that one is used to track the IP address of the sender.<br>
+<p>The origin/source system of the booking can be specified in the http header <strong>'TranssmartOrigin'</strong>. If this header is not specified then the value "API2" is used. This is not the same as the REST origin header; that one is used to track the IP address of the sender.<br>
 For all actions the same input is used but all responses are different and described below.<br>
-Consult your project manager / consultant for more information on implementation.<br>
+Consult your project manager or (implementation) consultant for more information on specific implementation needs.<br>
 The example shows a shipment with all possible values.</p>
 </div>
 </div>
@@ -917,7 +958,7 @@ The example shows a shipment with all possible values.</p>
 <h5 id="_using_units"><a class="link" href="#_using_units">Using units</a></h5>
 <div class="paragraph">
 <p>There are only a limited number of units allowed for both the weight and the size unit of measure.<br>
-In every case it so that the units must be consistently used within the complete shipment. It is not allowed to use one unit on the shipment level and another unit on the package level. If this is the case, the system will return an error.<br>
+In every case the units must be consistently used within the complete shipment. It is not allowed to use one unit on the shipment level and another unit on the package level. If this is the case, the system will return an error.<br>
 Additionally, the system reads the unit of measure of the shipment first. If empty, it will look for the first occurrence on the package level.</p>
 </div>
 </div>
@@ -925,7 +966,7 @@ Additionally, the system reads the unit of measure of the shipment first. If emp
 <h5 id="_delivery_note_lines"><a class="link" href="#_delivery_note_lines">Delivery Note Lines</a></h5>
 <div class="paragraph">
 <p>Currently, it is possible to send in Delivery Note Lines on shipment level but we strongly advice you to send them in on package level only.<br>
-We notice more and more carriers, especially when it concerns dangerous goods or customs shipments outside EU, expect the item information of each parcel to be registered on package level. For that reason in the future we plan the Delivery Note Lines on shipment level to go EOL (End of life). In case you already have an integration with us based on shipment level, we strongly advice you to change it to package level.</p>
+We notice more and more carriers, especially when it concerns dangerous goods or customs shipments outside EU, expect the item information of each parcel to be registered on package level. For that reason in the future we plan the Delivery Note Lines on shipment level to go EOL (End of life). In case you already have an integration with us based on shipment level, we strongly advice you to change it to package level. Of course we will communicate any change regarding this in time.</p>
 </div>
 </div>
 <div class="sect4">
@@ -32104,7 +32145,18 @@ Content-Length: 136
 <div class="sect2">
 <h3 id="_6_0_address_book_management"><a class="link" href="#_6_0_address_book_management">6.0 Address book management</a></h3>
 <div class="paragraph">
-<p>This involves managing addresses which can be reference as shipment receiver addresses or as dispatching points.</p>
+<p>This involves managing addresses that can be used as:<br></p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>receiver address for a shipment: "type": "RECV"<br>
+or as:<br></p>
+</li>
+<li>
+<p>dispatching location or, in other words, sender address: "type": "SEND".</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
 <p><code>Main resource:</code> v2/addresses</p>
@@ -33950,9 +34002,9 @@ Host: accept-api.transsmart.com</code></pre>
 <div class="sect2">
 <h3 id="_7_0_account_management"><a class="link" href="#_7_0_account_management">7.0 Account management</a></h3>
 <div class="paragraph">
-<p>This involves managing accounts and there settings.
-Some settings are inherited from the parent account(s), these settings can not be changed/deleted. These settings have a index value of -1.
-The settings are returned as a String but contain a json object, so beware that you first need to unwrap the String and then the appropriate setting object.</p>
+<p>This involves managing accounts and their settings.<br>
+Some settings are inherited from the parent account(s). These settings cannot be changed or deleted. These settings have an index value of -1.<br>
+The settings are returned as a String, but contain a json object, so beware that you first need to unwrap the String and then the appropriate setting object.</p>
 </div>
 <div class="paragraph">
 <p><code>Main resource:</code> v2/accounts</p>
@@ -35724,14 +35776,24 @@ Content-Length: 105
 <div class="sect3">
 <h4 id="_8_0_locations_retrieval"><a class="link" href="#_8_0_locations_retrieval">8.0 Locations retrieval</a></h4>
 <div class="paragraph">
-<p>Locations can be retrieved in 3 ways:+
-* For a single carrier+
-* For a selection of carriers+
-* For all carriers available to you+</p>
+<p>Locations can be retrieved in 3 ways:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>For a single carrier</p>
+</li>
+<li>
+<p>For a selection of carrier</p>
+</li>
+<li>
+<p>For all carriers available to you</p>
+</li>
+</ul>
 </div>
 <div class="paragraph">
-<p>If locations are retrieved for more than one carrier, the request will be forwarded in parallel to each carrier. Our platform then waits for all responses to be in before composing the response to the calling system.+
-Please note that almost all carriers offer online location selectors, latency can occur. As the requests are multithreaded and are returned on success or timeout (10 seconds) of the requested carriers, it can occur that a noticeable delay at a single carrier will influence the overall response times.+
+<p>If locations are retrieved for more than one carrier, the request will be forwarded in parallel to each carrier. Our platform then waits for all responses to be in before composing the response to the calling system.<br>
+Please note that almost all carriers offer online location selectors, latency can occur. As the requests are multithreaded and are returned on success or timeout (10 seconds) of the requested carriers, it can occur that a noticeable delay at a single carrier will influence the overall response times.<br>
 If possible, we encourage clients to implement the location selector on a per carrier basis. That way the client can asynchronously build up the checkout screen while waiting for the responses of slower carriers to be received, whereby the customer doesn&#8217;t need to wait too long for the screen to load.</p>
 </div>
 <div class="sect4">
@@ -60007,7 +60069,7 @@ Content-Length: 97
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-02-28 13:56:12 +0200
+Last updated 2024-03-01 12:24:24 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

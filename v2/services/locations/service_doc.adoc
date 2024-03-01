@@ -1,11 +1,12 @@
 ==== 8.0 Locations retrieval
-Locations can be retrieved in 3 ways:+
-* For a single carrier+
-* For a selection of carriers+
-* For all carriers available to you+
+Locations can be retrieved in 3 ways:
 
-If locations are retrieved for more than one carrier, the request will be forwarded in parallel to each carrier. Our platform then waits for all responses to be in before composing the response to the calling system.+
-Please note that almost all carriers offer online location selectors, latency can occur. As the requests are multithreaded and are returned on success or timeout (10 seconds) of the requested carriers, it can occur that a noticeable delay at a single carrier will influence the overall response times.+
+* For a single carrier
+* For a selection of carrier 
+* For all carriers available to you
+
+If locations are retrieved for more than one carrier, the request will be forwarded in parallel to each carrier. Our platform then waits for all responses to be in before composing the response to the calling system. +
+Please note that almost all carriers offer online location selectors, latency can occur. As the requests are multithreaded and are returned on success or timeout (10 seconds) of the requested carriers, it can occur that a noticeable delay at a single carrier will influence the overall response times. +
 If possible, we encourage clients to implement the location selector on a per carrier basis. That way the client can asynchronously build up the checkout screen while waiting for the responses of slower carriers to be received, whereby the customer doesn't need to wait too long for the screen to load.
 
 ===== Retrieve for a single carrier

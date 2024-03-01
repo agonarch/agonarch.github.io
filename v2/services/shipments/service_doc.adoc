@@ -1,24 +1,25 @@
 ==== 2.1 Shipment Booking
 ===== Action parameter
 The action parameter can be either CREATE , BOOK or PRINT. +
-With CREATE the shipment is only saved; no validation is performed. This can be used as a draft booking. +
-With BOOK the shipment is booked. +
-With PRINT the shipment is also booked and the parameter rawJob determines if the printing should be handled by the system or the to be printed documents should be returned in the response. +
+
+* With CREATE the shipment is only saved; no validation is performed. This can be used as a draft booking. +
+* With BOOK the shipment is booked. +
+* With PRINT the shipment is also booked and the parameter rawJob determines if the printing should be handled by the system or the to be printed documents should be returned in the response. +
 So in case of a rawJob, the actual base64 encoded shipment level and package level documents (PDF and/or ZPL) are included in the response. +
 
-The origin/source system of the booking can be specified in the http header 'TranssmartOrigin'. If this header is not specified then the value 'API2' is used. This is not the same as the REST origin header; that one is used to track the IP address of the sender. +
+The origin/source system of the booking can be specified in the http header *'TranssmartOrigin'*. If this header is not specified then the value "API2" is used. This is not the same as the REST origin header; that one is used to track the IP address of the sender. +
 For all actions the same input is used but all responses are different and described below. +
-Consult your project manager / consultant for more information on implementation. +
+Consult your project manager or (implementation) consultant for more information on specific implementation needs. +
 The example shows a shipment with all possible values.
 
 ===== Using units
 There are only a limited number of units allowed for both the weight and the size unit of measure. +
-In every case it so that the units must be consistently used within the complete shipment. It is not allowed to use one unit on the shipment level and another unit on the package level. If this is the case, the system will return an error. +
+In every case the units must be consistently used within the complete shipment. It is not allowed to use one unit on the shipment level and another unit on the package level. If this is the case, the system will return an error. +
 Additionally, the system reads the unit of measure of the shipment first. If empty, it will look for the first occurrence on the package level.
 
 ===== Delivery Note Lines
 Currently, it is possible to send in Delivery Note Lines on shipment level but we strongly advice you to send them in on package level only. +
-We notice more and more carriers, especially when it concerns dangerous goods or customs shipments outside EU, expect the item information of each parcel to be registered on package level. For that reason in the future we plan the Delivery Note Lines on shipment level to go EOL (End of life). In case you already have an integration with us based on shipment level, we strongly advice you to change it to package level.
+We notice more and more carriers, especially when it concerns dangerous goods or customs shipments outside EU, expect the item information of each parcel to be registered on package level. For that reason in the future we plan the Delivery Note Lines on shipment level to go EOL (End of life). In case you already have an integration with us based on shipment level, we strongly advice you to change it to package level. Of course we will communicate any change regarding this in time.
 
 
 
