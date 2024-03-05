@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 2.0.21">
-<meta name="author" content="Copyright &#169; 2024 - Product Development - last updated: 2024-03-01">
+<meta name="author" content="Copyright &#169; 2024 - Product Development - last updated: 2024-03-05">
 <title>nShift Transsmart Developer Documentation</title>
 <link rel="stylesheet" href="./resources/nshift-style-override.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -33,7 +33,7 @@
 <div id="header">
 <h1>nShift Transsmart Developer Documentation</h1>
 <div class="details">
-<span id="author" class="author">Copyright &#169; 2024 - Product Development - last updated: 2024-03-01</span><br>
+<span id="author" class="author">Copyright &#169; 2024 - Product Development - last updated: 2024-03-05</span><br>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -58,7 +58,8 @@
 </ul>
 </li>
 <li><a href="#_endpoints">Endpoints</a>
-<ul class="sectlevel2">
+<ul class="sectlevel3">
+<li><a href="#_explanation">Explanation</a></li>
 <li><a href="#_1_0_authenticating">1.0 Authenticating</a>
 <ul class="sectlevel3">
 <li><a href="#_1_1_requesting_for_a_token">1.1 Requesting for a token</a></li>
@@ -257,7 +258,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#_8_0_pick_up_locations_determination">8.0 Pick-up locations determination</a>
+<li><a href="#_8_0_pick_up_drop_off_locations">8.0 Pick-Up &amp; Drop-Off locations</a>
 <ul class="sectlevel3">
 <li><a href="#_8_0_locations_retrieval">8.0 Locations retrieval</a>
 <ul class="sectlevel4">
@@ -293,18 +294,13 @@
 <p>The purpose of this document is to be a sufficient guideline for integrating the Transsmart platform in the operations of another system.</p>
 </div>
 <div class="paragraph">
-<p>Target Audience<br>
-Though the title of this document may imply that its target audience is developers, it actually is meant to be used by all system integrators that for one reason or the other may have an interest in the Transsmart integration capabilities.</p>
+<p>Though the title of this document may imply that its target audience is developers, it actually is meant to be used by all system integrators that for one reason or the other may have an interest in the Transsmart integration capabilities. So system integrators, platform/solution architects and system developers, are all perceived as being the target audience of this document.</p>
 </div>
 <div class="paragraph">
-<p>So system integrators, platform/solution architects and system developers, are all perceived as being the target audience of this document.</p>
+<p>For any reader of this document, it should be possible to easily identify what the Transsmart integration platform has to offer, in terms of versioning and their respective supported resources.</p>
 </div>
 <div class="paragraph">
-<p>What is on offer?<br>
-For any reader of this document, it should be possible to easily identify what the Transsmart integration platform has to offer, in terms of versioning and their respective supported resources.</p>
-</div>
-<div class="paragraph">
-<p>The document references all publicly available environments, i.e. user acceptance and production.</p>
+<p>The document references all publicly available environments, i.e. beta developments, user acceptance and production.</p>
 </div>
 </div>
 </div>
@@ -651,24 +647,17 @@ In the examples given in the resources' description only the json format is demo
 <h3 id="_direct_links"><a class="link" href="#_direct_links">Direct links</a></h3>
 <div class="paragraph">
 <p>The MyTranssmart dashboard supports direct links. These can be used to direct link from an ERP system to a specific page in the MyTranssmart dashboard:<br>
-Path /v2/direct/details?key=cQBauM7gcQBauM7g&#8230;&#8203;&amp;reference=71117854<br>
-Note: key and reference are not valid, you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters. See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key.</p>
+<code>Path /v2/direct/details?key=cQBauM7gcQBauM7g&#8230;&#8203;&amp;reference=71117854</code><br>
+Note: key and reference in this example are not valid; you need a valid customer key and reference. Don’t forget to URL encode it as required for all query parameters.<br>
+See chapter 1.1 ‘Requesting for a token’ on how to obtain the required key.</p>
 </div>
 <div class="paragraph">
 <p>Options:</p>
 </div>
-<div class="ulist">
-<ul>
-<li>
-<p>/v2/direct/details?key=….&amp;reference=..&amp;account=&#8230;&#8203;</p>
-</li>
-<li>
-<p>/v2/direct/overview?key=….</p>
-</li>
-<li>
-<p>/v2/direct/manifest?key=….</p>
-</li>
-</ul>
+<div class="paragraph">
+<p><code>/v2/direct/details?key=…&amp;reference=…&amp;account=…</code><br>
+<code>/v2/direct/overview?key=…</code><br>
+<code>/v2/direct/manifest?key=…</code><br></p>
 </div>
 <div class="paragraph">
 <p>Explanation:</p>
@@ -676,13 +665,13 @@ Note: key and reference are not valid, you need a valid customer key and referen
 <div class="ulist">
 <ul>
 <li>
-<p>Key = the login key<br></p>
+<p><strong>key</strong> = the login key<br></p>
 </li>
 <li>
-<p>Reference = the reference of a shipment<br></p>
+<p><strong>reference</strong> = the reference of a shipment<br></p>
 </li>
 <li>
-<p>Account = optional, the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account. See chapter 'Act on behalf' below for more information.</p>
+<p><strong>account</strong> = optionally, the account where the shipment is booked on. If not specified the account belonging to the key is used. This can be used if the shipment is booked on a child account and if you want to access this shipment via Act on Behalf function with the key of the parent account. See chapter 'Act on behalf' below for more information.</p>
 </li>
 </ul>
 </div>
@@ -697,31 +686,32 @@ This accounts hierarchy also applies to the accounts settings so any setting spe
 <div class="sect2">
 <h3 id="_act_on_behalf"><a class="link" href="#_act_on_behalf">Act on Behalf</a></h3>
 <div class="paragraph">
-<p>The 'Act on Behalf' feature of the API makes it possible to use a child/grandchild account in the same way as the account where you are logged into. You can perform the same actions on the child account as which you can do on the logged in account. This can be done by replacing the account code in the URL by the account code that you want the action to be performed on.</p>
+<p>The 'Act on Behalf' feature of the API makes it possible to use a child or grandchild account in the same way as the account where you are logged into, which we call the main or (grand)parent account. Note that a child account is also sometimes referred to as a subaccount. Both terms mean the same. You can perform the same actions on the child account as which you can do on the logged in main account. This can be done by replacing the account code in the URL by the account code that you want the action to be performed on.</p>
 </div>
 <div class="paragraph">
-<p>Example:
-You login as user of the ERPDEMO account, which is a main/parent account. A booking is then performed with this URL:</p>
+<p>Example of booking a shipment in the main account:<br>
+1. You log in as a user of main account "DEMO"<br>
+2. You perform a booking with this URL: <code>POST request to /v2/shipments/<strong>DEMO</strong>/BOOK</code><br>
+3. This will book the shipment on account "DEMO"<br></p>
 </div>
 <div class="paragraph">
-<p><code>POST request to /v2/shipments/<strong>ERPDEMO</strong>/BOOK</code></p>
+<p>Example of booking a shipment in the child account:<br>
+Now for example, account "DEMOSUB" is a child account of "DEMO". If you want to book on account "DEMOSUB" the flow is:<br>
+1. You log in as a user of main account "DEMO" (so the same user as above which is a user that only exists in the main account).<br>
+2. You perform a booking with this URL: <code>POST request to /v2/shipments/<strong>DEMOSUB</strong>/BOOK</code><br>
+3. This wil book the shipment on account "DEMOSUB"<br></p>
 </div>
-<div class="paragraph">
-<p>This will book the shipment on account ERPDEMO.</p>
-</div>
-<div class="paragraph">
-<p>Now for example, account ERDEMOCHILD is a child account of ERPDEMO. If you want to book on account ERDEMOCHILD the flow is:<br>
-1. You login as user of the ERPDEMO account (so the same user as above).<br>
-2. A booking is then performed with this URL:</p>
-</div>
-<div class="paragraph">
-<p><code>POST request to /v2/shipments/<strong>ERDEMOCHILD</strong>/BOOK</code></p>
-</div>
-<div class="paragraph">
-<p>This wil book the shipment on account ERDEMOCHILD.</p>
-</div>
-<div class="paragraph">
-<p>The <a href="#_7_9_get_account_information">Account information</a> endpoint provides information to which account the Act on Behalf can be performed.</p>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The <a href="#_7_9_get_account_information">Account information</a> endpoint provides information to which account the Act on Behalf can be performed.
+</td>
+</tr>
+</table>
 </div>
 <div class="paragraph">
 <p><strong>Permissions</strong></p>
@@ -730,10 +720,8 @@ You login as user of the ERPDEMO account, which is a main/parent account. A book
 <p>You keep the same permissions as you have on the parent account, even if the child account has less permissions.</p>
 </div>
 <div class="paragraph">
-<p>Example:</p>
-</div>
-<div class="paragraph">
-<p>Your main account has Reporting permissions and you log in with an user with Reporting permissions.
+<p>Example:<br>
+Your main account has Reporting permissions and you log in with an user with Reporting permissions.
 The child account does not have Reporting permissions which means that users that directly connect to that account will not be able to download a report. If the user that logs into the main account uses Act on Behalf to log into the child account, that user will be able to download a report for that child account.</p>
 </div>
 </div>
@@ -749,7 +737,7 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2024-02-28T12:42:49.450320273",
+    "timestamp": "2024-02-29T12:42:49.450320273",
     "code": "TS222122",
     "message": "Failed to print",
     "description": "No printer found for type: LASER",
@@ -763,7 +751,7 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2024-02-28T12:42:49.450320273",
+    "timestamp": "2024-02-29T12:42:49.450320273",
     "code": "TS10002",
     "message": "Invalid input shipment data",
     "details": [{
@@ -792,7 +780,7 @@ The child account does not have Reporting permissions which means that users tha
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-json hljs" data-lang="json">{
     "status": "BAD_REQUEST",
-    "timestamp": "2024-02-28T12:42:49.450320273",
+    "timestamp": "2024-02-29T12:42:49.450320273",
     "code": "TS10002",
     "message": "Batch booking error",
     "description": "Booking failed for all shipments",
@@ -835,11 +823,10 @@ From this point on-words, where used in this documentation, the "API" refers to 
 <p>This section describes the API.<br>
 Information regarding authenticating to API is provided first, followed by the description of the respective API resources, in relation to their related functionality.</p>
 </div>
-<div class="literalblock">
-<div class="content">
-<pre> Explanation
-The descriptions provide the following API properties:</pre>
-</div>
+<div class="sect3">
+<h4 id="_explanation"><a class="link" href="#_explanation">Explanation</a></h4>
+<div class="paragraph">
+<p>The descriptions provide the following API properties:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -862,6 +849,7 @@ The descriptions provide the following API properties:</pre>
 <p>Data default (if applicable)</p>
 </li>
 </ul>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_1_0_authenticating"><a class="link" href="#_1_0_authenticating">1.0 Authenticating</a></h3>
@@ -35768,14 +35756,14 @@ Content-Length: 105
 </div>
 </div>
 <div class="sect2">
-<h3 id="_8_0_pick_up_locations_determination"><a class="link" href="#_8_0_pick_up_locations_determination">8.0 Pick-up locations determination</a></h3>
+<h3 id="_8_0_pick_up_drop_off_locations"><a class="link" href="#_8_0_pick_up_drop_off_locations">8.0 Pick-Up &amp; Drop-Off locations</a></h3>
 <div class="paragraph">
 <p><code>Main resource:</code> v2/locations</p>
 </div>
 <div class="sect3">
 <h4 id="_8_0_locations_retrieval"><a class="link" href="#_8_0_locations_retrieval">8.0 Locations retrieval</a></h4>
 <div class="paragraph">
-<p>Locations can be retrieved in 3 ways:</p>
+<p>Pick-Up &amp; Drop-Off (PUDO) locations can be retrieved in 3 ways:</p>
 </div>
 <div class="ulist">
 <ul>
@@ -60068,7 +60056,7 @@ Content-Length: 97
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2024-03-01 12:24:24 +0200
+Last updated 2024-03-05 12:19:34 +0200
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

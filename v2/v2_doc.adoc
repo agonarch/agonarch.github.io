@@ -2,10 +2,7 @@
 This section describes the API. + 
 Information regarding authenticating to API is provided first, followed by the description of the respective API resources, in relation to their related functionality.
 
-
-
-
- Explanation
+==== Explanation
 The descriptions provide the following API properties:
 
 * Supported data formats
@@ -95,7 +92,7 @@ The settings are returned as a String, but contain a json object, so beware that
 
 include::services/account/service_doc.adoc[]
 
-=== 8.0 Pick-up locations determination
+=== 8.0 Pick-Up & Drop-Off locations
 
 `Main resource:` v2/locations
 

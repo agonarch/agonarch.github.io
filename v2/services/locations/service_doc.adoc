@@ -1,5 +1,5 @@
 ==== 8.0 Locations retrieval
-Locations can be retrieved in 3 ways:
+Pick-Up & Drop-Off (PUDO) locations can be retrieved in 3 ways:
 
 * For a single carrier
 * For a selection of carrier 
