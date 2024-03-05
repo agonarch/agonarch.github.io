@@ -53,7 +53,7 @@ h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{
     font-family:"Inter",sans-serif;
     font-weight:600;
     font-style:normal;
-    font-size: 18px;
+    font-size: 24px; /*b before 18px; */
     color:#000A3C;
 }
 
@@ -63,7 +63,7 @@ h1,h2,h3,#toctitle,.sidebarblock>.content>.title,h4,h5,h6{
 
 /* Text for the normal content */
 p, blockquote, dt, td.content, td.hdlist1, span.alt, summary {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
     color: #333B63;
     line-height: 24px;
@@ -94,7 +94,7 @@ a {
 
 .toc2 > .sectlevel1 {
     border-radius: 4px;
-    background-color: rgba(255, 255, 255, 0.12);
+    /* background-color: rgba(255, 255, 255, 0.12); */
     margin-top: 200px;
     position: relative;
     padding-top: 16px;
@@ -117,6 +117,10 @@ a {
         margin-bottom: 140px;
 }
 
+#toc li {
+    padding-bottom: 4px;
+}
+
 #toc>ul {
     margin-left: 0;
 }
@@ -133,6 +137,7 @@ a {
     padding: 1px 10px 1px 10px;
     box-decoration-break: clone;
     -webkit-box-decoration-break: clone;
+    transition: all 0.2s ease;
 }
 
 #toc a:active {
@@ -169,7 +174,7 @@ table.grid-all>*>tr>* {
 
 table.grid-all>*>tr>th {
     border-top: 0;
-    padding-top: 24px;
+    /* padding-top: 24px; */
     padding-bottom: 12px;
 }
 
@@ -179,9 +184,11 @@ table.frame-all {
     opacity: 1;
     background-color: rgba(255, 255, 255, 1);
     overflow: hidden;
+    padding-top: 14px;
+    padding-bottom: 12px;
 }
 
-code {
+.tableblock code {
     color: #535D74;
     font-family:"Inter",sans-serif;
     font-weight:400;
@@ -269,3 +276,30 @@ table.tableblock>.title {
     color: #ffffff;
     padding-left: 60px;
 }
+
+.toc2.toc-left::-webkit-scrollbar {
+    width: 8px;
+  }
+.toc2.toc-left::-webkit-scrollbar-track {
+    border-radius: 4px;
+  }
+.toc2.toc-left::-webkit-scrollbar-thumb {
+    background: var(--lightNeutralColor, #ccced8); 
+    border-radius: 4px;
+    background-clip: padding-box;
+  }
+
+.toc2::-webkit-scrollbar {
+    width: 8px;
+  }
+.toc2::-webkit-scrollbar-track {
+    background-color: transparent;
+    border-radius: 4px;
+    padding-left:4px;
+    padding-right:4px;
+  }
+ .toc2::-webkit-scrollbar-thumb {
+    background: var(--lightNeutralColor, #ccced8); 
+    border-radius: 4px;
+    width: 8px;
+  }

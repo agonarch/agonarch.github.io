@@ -2,7 +2,10 @@
 This section describes the API. + 
 Information regarding authenticating to API is provided first, followed by the description of the respective API resources, in relation to their related functionality.
 
-==== Explanation
+
+
+
+ Explanation
 The descriptions provide the following API properties:
 
 * Supported data formats
