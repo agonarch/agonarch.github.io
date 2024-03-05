@@ -4,21 +4,24 @@
 @font-face {
     font-family: 'Inter';
     font-weight: 400; /* Regular */
-    src: url('fonts/Inter-Regular.woff2') format('woff2'),
+    src: url('fonts/Inter-Regular.ttf') format('ttf'), 
+         url('fonts/Inter-Regular.woff2') format('woff2'),
          url('fonts/Inter-Regular.woff') format('woff');
   }
   
   @font-face {
     font-family: 'Inter';
     font-weight: 100; /* Thin */
-    src: url('fonts/Inter-Thin.woff2') format('woff2'),
+    src: url('fonts/Inter-Thin.ttf') format('ttf'),
+         url('fonts/Inter-Thin.woff2') format('woff2'),
          url('fonts/Inter-Thin.woff') format('woff');
   }
   
   @font-face {
     font-family: 'Inter';
     font-weight: 500; /* Medium */
-    src: url('fonts/Inter-Medium.woff2') format('woff2'),
+    src: url('fonts/Inter-Medium.ttf') format('ttf'),
+         url('fonts/Inter-Medium.woff2') format('woff2'),
          url('fonts/Inter-Medium.woff') format('woff');
   }
   
@@ -33,7 +36,8 @@
   @font-face {
     font-family: 'Inter';
     font-weight: 700; /* Bold */
-    src: url('fonts/Inter-Bold.woff2') format('woff2'),
+    src: url('fonts/Inter-Bold.ttf') format('ttf'),
+         url('fonts/Inter-Bold.woff2') format('woff2'),
          url('fonts/Inter-Bold.woff') format('woff');
   }
 
