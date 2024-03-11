@@ -3,7 +3,7 @@ Copyright (C) {docyear} - Product Development - last updated: {docdate}
 :doctype: book
 :docinfo: shared,shared-head
 :icons: font
-:source-highlighter: highlightjs
+:source-highlighter: rouge
 :toc: left
 :toclevels: 4
 :sectlinks:
